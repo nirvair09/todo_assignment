@@ -195,21 +195,6 @@ export default function LoginPage() {
 									"Log in"
 								)}
 							</button>
-							<button
-								onClick={guestLogin}
-								type="button"
-								disabled={!isValid || isSubmitting}
-								className="text-white cursor-pointer flex items-center gap-2 w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								{isSubmitting && guestLoading ? (
-									<>
-										Logging in...
-										<BiLoaderAlt className="text-lg animate-spin" />
-									</>
-								) : (
-									"Guest login"
-								)}
-							</button>
 						</div>
 					</form>
 
