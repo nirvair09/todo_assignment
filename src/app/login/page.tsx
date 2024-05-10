@@ -13,13 +13,9 @@ import {useTodos} from "@/context/todo";
 const userSchema = yup.object().shape({
 	email: yup.string().email("Invalid email").required("Email is required"),
 	password: yup
-		.string()
-		.required("Password is required")
-		.min(8, "Password must be at least 8 characters")
-		.matches(
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]+$/,
-			"Password must contain at least one uppercase letter, one lowercase letter, and one digit"
-		),
+        .string()
+        .required("Password is required")
+        .min(8, "Password must be at least 8 characters"),
 });
 
 export default function LoginPage() {
