@@ -182,19 +182,19 @@ export default function LoginPage() {
 
 						<div className="grid grid-cols-2 gap-3">
 							<button
-								type="submit"
-								disabled={!isValid || isSubmitting}
-								className="cursor-pointer flex items-center gap-2 w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								{isSubmitting && loginLoading ? (
-									<>
-										Logging in...
-										<BiLoaderAlt className="text-lg animate-spin" />
-									</>
-								) : (
-									"Log in"
-								)}
-							</button>
+    type="submit"
+    disabled={!isValid || isSubmitting}
+    className={`${
+        isValid
+            ? "bg-blue-600 hover:bg-blue-500 slide-in-elliptic-top-fwd"
+            : "bg-red-600 cursor-not-allowed hover:bg-red-500 shake-horizontal"
+    } 
+    cursor-pointer flex items-center gap-2 w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm`}
+>
+    {isSubmitting ? "Logging in..." : "Log in"}
+    {loginLoading && <BiLoaderAlt className="text-lg animate-spin" />}
+</button>
+
 						</div>
 					</form>
 
