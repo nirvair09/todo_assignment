@@ -10,14 +10,14 @@ const Navbar = (props: Props) => {
   const searchParams = useSearchParams();
   const todosFilter = searchParams.get("todos");
 
-  return (
+return (
     <nav className="mt-5 min-h-full flex items-center justify-around py-5">
       <Link
         href={"/"}
         className={`${
           todosFilter === null
-            ? `text-blue-500 px-2 bg-slate-900 py-1 rounded-md transition-all active:border-blue-600
-            focus:border-blue-600 border-2 hover:bg-slate-700 focus:outline-none border-transparent`
+            ? `text-blue-500 px-2 bg-white py-1 rounded-md transition-all active:border-blue-600
+            focus:border-blue-600 border-2 hover:bg-gray-100 focus:outline-none border-transparent`
             : "px-2 py-1 text-gray-500 hover:border-b border-blue-400 animate-pulse"
         }`}
       >
@@ -27,8 +27,8 @@ const Navbar = (props: Props) => {
         href={"/?todos=active"}
         className={`${
           todosFilter === "active"
-            ? `text-blue-500 px-2 bg-slate-900 py-1 rounded-md transition-all active:border-blue-600
-        focus:border-blue-600 border-2 hover:bg-slate-700 focus:outline-none border-transparent`
+            ? `text-blue-500 px-2 bg-white py-1 rounded-md transition-all active:border-blue-600
+        focus:border-blue-600 border-2 hover:bg-gray-100 focus:outline-none border-transparent`
             : "px-2 py-1 text-gray-500 hover:border-b border-blue-400"
         }`}
       >
@@ -38,8 +38,8 @@ const Navbar = (props: Props) => {
         href={"/?todos=completed"}
         className={`${
           todosFilter === "completed"
-            ? `text-blue-500 bg-slate-900 px-2  py-1 rounded-md transition-all active:border-blue-600
-        focus:border-blue-600 border-2 hover:bg-slate-700 focus:outline-none border-transparent`
+            ? `text-blue-500 bg-white px-2  py-1 rounded-md transition-all active:border-blue-600
+        focus:border-blue-600 border-2 hover:bg-gray-100 focus:outline-none border-transparent`
             : " px-2 py-1 text-gray-500 hover:border-b border-blue-400"
         }`}
       >
