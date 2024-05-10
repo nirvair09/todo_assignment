@@ -44,31 +44,6 @@ export default function LoginPage() {
 			setLoginLoading(false);
 		}
 	};
-
-	const guestLogin = async () => {
-		setValues({email: "Jayeshgadhok@gmail.com", password: "Jayesh@1996"});
-		try {
-			setGuestLoading(true);
-			const response = await axios.post("/api/users/login", {
-				email: "Jayeshgadhok@gmail.com",
-				password: "Jayesh@1996",
-			});
-			const responseData = response.data;
-			if (!responseData.error) {
-				router.push("/");
-				toast({title: responseData.message});
-			}
-		} catch (error: any) {
-			const errorMessage =
-				error.response?.data?.error || "An error occurred during guest login.";
-			toast({title: errorMessage});
-			console.error("An error occurred during guest login:", error);
-		} finally {
-			setGuestLoading(false);
-			resetForm();
-		}
-	};
-
 	const {
 		handleSubmit,
 		values,
@@ -126,7 +101,7 @@ export default function LoginPage() {
 									value={values.email}
 									onChange={handleChange}
 									onBlur={() => handleTouched("email")}
-									placeholder="nirvar09@gmail.com"
+									placeholder="email"
 									autoComplete="email"
 									required
 									className={`w-full rounded-md border-5 bg-transparent/5 placeholder:text-black/30 border-gray-600 py-1.5 text-black shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 ${
@@ -166,7 +141,7 @@ export default function LoginPage() {
 									value={values.password}
 									onChange={handleChange}
 									onBlur={() => handleTouched("password")}
-									placeholder=""
+									placeholder="password"
 									required
 									className={`w-full rounded-md border-5 bg-transparent/5 placeholder:text-black/30 border-gray-600 py-1.5 text-black shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 ${
 										touched.password && errors.password
