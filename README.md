@@ -18,3 +18,9 @@ This project is a TodoApp built with Next.js 13, TypeScript, Tailwind CSS, Mongo
 - **MongoDB:** A NoSQL database for storing user and task data.
 - **Local Storage:** HTML5 web storage technology for storing data locally within the user's browser.
 - **React Hook Form:** A library for managing form state and validation in React applications.
+
+
+## Live Deployed
+Link for live website:- https://todo-assignment-eight.vercel.app/
+
+** all data is encrypted
