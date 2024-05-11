@@ -18,7 +18,7 @@ const AddTodo = () => {
     const onTaskAdded = async (values) => {
         try {
             // Send a POST request to the server to add the task
-            const response = await axios.post("/api/user/usertask", values);
+            const response = await axios.post("/api/usertask", values);
             console.log(response.data);
             toast({ title: "Task added successfully" });
         } catch (error) {
