@@ -1,62 +1,37 @@
-"use client";
+import {Connect} from "@/db/dbConfig";
+import Task from "@/models/todoModel";
+import {NextRequest, NextResponse} from "next/server";
 
-import axios from "axios";
-import { useFormik } from "formik";
-import { BiLoaderAlt } from "react-icons/bi";
-import { useEffect, useState } from "react";
-import * as yup from "yup";
-import { useToast } from "./ui/use-toast";
+Connect();
 
-const taskSchema = yup.object().shape({
-    todo: yup.string().min(5).required("Valid task is required"),
-});
+export async function POST(request: NextRequest) {
+	try {
+		// Parse the request body as JSON
+		const reqBody = await request.json();
+		console.log(reqBody);
+		// Destructure the task property from the request body
+		const {task} = reqBody;
 
-const AddTodo = () => {
-    const { toast } = useToast();
-    const [isSubmitting, setIsSubmitting] = useState(false);
+		// Check if the task property exists
+		if (!task) {
+			return NextResponse.json({error: "Task is required."}, {status: 400});
+		}
 
-    const onTaskAdded = async (values) => {
-        try {
-            // Send a POST request to the server to add the task
-            const response = await axios.post("/api/user/usertask", values);
-            console.log(response.data);
-            toast({ title: "Task added successfully" });
-        } catch (error) {
-            console.error("Error adding task:", error);
-            toast({ title: "Failed to add task. Please try again later." });
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+		// Create a new Task instance with the task property
+		const userTask = new Task({task});
 
-    const formik = useFormik({
-        initialValues: { todo: "" },
-        validationSchema: taskSchema,
-        onSubmit: onTaskAdded,
-    });
+		// Save the task to the database
+		const savedTask = await userTask.save();
 
-    useEffect(() => {
-        setIsSubmitting(formik.isValidating || formik.isSubmitting);
-    }, [formik.isValidating, formik.isSubmitting]);
-
-    return (
-        <form onSubmit={formik.handleSubmit}>
-            <input
-                type="text"
-                name="todo"
-                placeholder="Write your task...."
-                value={formik.values.todo}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-            />
-            {formik.touched.todo && formik.errors.todo && (
-                <div>{formik.errors.todo}</div>
-            )}
-            <button type="submit" disabled={isSubmitting}>
-                Add task {isSubmitting && <BiLoaderAlt className="animate-spin" />}
-            </button>
-        </form>
-    );
-};
-
-export default AddTodo;
+		// Return a success response with the saved task
+		return NextResponse.json({
+			message: "Task added successfully.",
+			success: true,
+			task: savedTask,
+		});
+	} catch (error: any) {
+		console.error(error);
+		// Return a generic server error response
+		return NextResponse.json({error: "Internal server error."}, {status: 500});
+	}
+}
